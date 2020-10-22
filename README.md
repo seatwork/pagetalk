@@ -1,5 +1,5 @@
 # PageTalk
-鉴于 [Gitalk](https://gitalk.github.io/) 在国内调用 Github API 速度太慢，自行开发了一款基于 [LeanCloud](https://leancloud.cn/) 存储的无后端评论系统。示例：https://
+鉴于 [Gitalk](https://gitalk.github.io/) 在国内调用 Github API 速度太慢，自行开发了一款基于 [LeanCloud](https://leancloud.cn/) 存储的无后端评论系统。示例：https://seatwork.github.io/pagetalk.js/
 
 ## 系统特点
 
@@ -9,7 +9,7 @@
 
 - **使用非常方便**：寥寥数行代码即可在任何页面上添加评论功能。
 
-- **功能非常简单**：由于目前仅针对个人博客使用，功能相比其他同类项目更为简单，例如不支持表情、不支持国际化、不支持多级回复、不支持语法高亮等等，适合对评论功能要求不多的个人网站或博客使用。
+- **功能非常简单**：由于目前仅针对个人博客使用，功能相比其他同类项目更为简单，例如不支持表情、不支持国际化、不支持多级回复、不支持语法高亮、不支持分页等等，适合对评论功能要求不多的个人网站或博客使用。
 
 - **无后端实现**：纯浏览器端版本。修改和删除数据需在 LeanCloud 后台操作。
 
@@ -18,8 +18,8 @@
 1. 注册 [LeanCloud](https://leancloud.cn/) 账号，获取 AppID 和 AppKey；
 2. 在需要添加评论的页面放置如下代码即可：
 ```html
-<link rel="stylesheet" href="pagetalk.css"/>
-<script src="pagetalk.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/seatwork/pagetalk.js/pagetalk.min.css"/>
+<script src="https://cdn.jsdelivr.net/gh/seatwork/pagetalk.js/pagetalk.min.js"></script>
 
 <div id="pagetalk"></div>
 <script>
@@ -45,4 +45,4 @@ LeanCloud 开发版免费配额如下：
 2. 针对存储 Class 禁止所有用户的更新和删除权限；（防后端调用）
 
 ## 未尽事宜
-任何问题请在 https:// 下方留言。
+任何问题请在 https://seatwork.github.io/pagetalk.js/ 下方留言。
