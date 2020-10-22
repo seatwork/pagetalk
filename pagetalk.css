@@ -1,0 +1,250 @@
+.pgtk-container * {
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 14px;
+}
+
+.pgtk-container a {
+  text-decoration: none;
+}
+
+.pgtk-container a:hover {
+  text-decoration: underline;
+}
+
+.pgtk-container svg {
+  fill: #999;
+  cursor: pointer;
+}
+
+.pgtk-section {
+  display: flex;
+  margin: 20px 0;
+}
+
+.pgtk-avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f9f9f9;
+}
+
+.pgtk-avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.pgtk-triangle {
+  position: absolute;
+  right: -16px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #ccc;
+}
+
+.pgtk-triangle:before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 1px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid #f9f9f9;
+}
+
+.pgtk-form, .pgtk-comment {
+  flex: 1;
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+.pgtk-form-inputs {
+  display: flex;
+}
+
+.pgtk-form-inputs>input, .pgtk-textarea {
+  outline: 0;
+  width: 100%;
+  border-radius: 5px;
+  border: #ddd 1px solid;
+  background: #f9f9f9;
+  font: inherit;
+  transition: all .3s;
+}
+
+.pgtk-form-inputs>input:focus, .pgtk-textarea:focus {
+  background: #fff
+}
+
+.pgtk-form-inputs>input {
+  padding: 8px;
+  margin-left: 10px;
+}
+
+.pgtk-form-inputs>input:first-child {
+  margin: 0;
+}
+
+.pgtk-textarea {
+  margin: 10px 0;
+  padding: 10px;
+  min-height: 80px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.pgtk-textarea:empty::before, ::placeholder {
+  content: attr(placeholder);
+  color: #999;
+}
+
+.pgtk-controls {
+  display: flex;
+}
+
+.pgtk-controls>div {
+  flex: 1;
+}
+
+.pgtk-controls button {
+  outline: 0;
+  padding: 6px 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid #3fb960;
+  border-radius: 3px;
+  background: #3fb960;
+  color: #fff;
+  font: inherit;
+  font-size: 0.95em;
+  transition: opacity .3s;
+}
+
+.pgtk-controls button:hover {
+  opacity: .9;
+}
+
+.pgtk-controls button.pgtk-submit {
+  margin-right: 10px;
+}
+
+.pgtk-controls button.pgtk-preview {
+  background: #fff;
+  color: #3fb960;
+}
+
+.pgtk-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  color: #999;
+  background: #f9f9f9;
+  border: #e3e3e3 1px solid;
+  border-bottom: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.pgtk-profile a {
+  color: #3fb960;
+  font-weight: 700;
+}
+
+.pgtk-markdown {
+  padding: 15px;
+  border: #e3e3e3 1px solid;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.pgtk-markdown img {
+  max-width: 100%;
+}
+
+.pgtk-markdown code {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 0.95em;
+  margin: 0 5px;
+  padding: 2px 5px;
+  background: #f6f8fa;
+}
+
+.pgtk-markdown pre {
+  overflow: auto;
+  background: #f6f8fa;
+  padding: 10px;
+}
+
+.pgtk-markdown pre code {
+  margin: 0;
+  padding: 0;
+}
+
+.pgtk-markdown p, .pgtk-markdown ul, .pgtk-markdown ol, .pgtk-markdown blockquote {
+  margin: 10px 0;
+}
+
+.pgtk-markdown ul, .pgtk-markdown ol {
+  margin-left: -20px;
+}
+
+.pgtk-markdown blockquote {
+  padding-left: 10px;
+  border-left: #ddd 3px solid;
+  color: #999;
+}
+
+.pgtk-markdown>:first-child, .pgtk-markdown blockquote>:first-child {
+  margin-top: 0;
+}
+
+.pgtk-markdown>:last-child, .pgtk-markdown blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.pgtk-markdown pre::-webkit-scrollbar {
+  height: 5px;
+}
+
+.pgtk-markdown pre::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.pgtk-message {
+  text-align: center;
+  color: #999;
+}
+
+.pgtk-error {
+  color: #eb3941;
+}
+
+@media (max-width: 480px) {
+  .pgtk-avatar {
+    width: 30px;
+    height: 30px;
+    margin: 5px 0;
+  }
+  .pgtk-form-inputs {
+    flex-direction: column;
+  }
+  .pgtk-form-inputs>input {
+    margin: 0;
+    margin-top: 10px;
+  }
+  .pgtk-controls>div {
+    display: none;
+  }
+  .pgtk-controls button {
+    flex: 1;
+  }
+}
