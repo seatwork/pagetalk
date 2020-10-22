@@ -1,6 +1,8 @@
 .pgtk-container * {
   box-sizing: border-box;
-  font: inherit;
+}
+
+.pgtk-container {
   font-size: 14px;
 }
 
