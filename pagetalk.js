@@ -10,6 +10,9 @@ class PageTalk {
             marked.setOptions({
                 sanitize: true
             })
+            this.className = options.className || 'PageTalk_Comment'
+            this.lcs = new LeanCloudStorage(options)
+            this.listComments()
         })
 
         this.emailReg = /^[a-zA-Z0-9_\-\.]+\@[a-zA-Z0-9_\-\.]+\.([a-zA-Z]{2,8})$/
@@ -17,10 +20,6 @@ class PageTalk {
 
         this.avatar = 'https://cn.gravatar.com/avatar/'
         this.createHeader(options.container)
-
-        this.className = options.className || 'PageTalk_Comment'
-        this.lcs = new LeanCloudStorage(options)
-        this.listComments()
     }
 
     createHeader(container) {
