@@ -186,8 +186,8 @@ class PageTalk {
         if (!comment.content) {
             return '评论内容不能为空'
         }
-        if (comment.content.length > 1000) {
-            return '评论内容超过1000字限制'
+        if (comment.content.length > 2000) {
+            return '评论内容超过 2000 字限制'
         }
         return true
     }
