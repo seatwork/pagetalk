@@ -4,6 +4,7 @@
 
 .pgtk-container {
   font-size: 14px;
+  line-height: 1.6;
 }
 
 .pgtk-container a {
@@ -87,7 +88,7 @@
 }
 
 .pgtk-form-inputs>input {
-  padding: 8px;
+  padding: 7px;
   margin-left: 10px;
 }
 
@@ -118,7 +119,7 @@
 
 .pgtk-controls button {
   outline: 0;
-  padding: 6px 20px;
+  padding: 5px 20px;
   white-space: nowrap;
   cursor: pointer;
   border: 1px solid #3fb960;
@@ -147,7 +148,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 9px 15px;
   color: #999;
   background: #f9f9f9;
   border: #e3e3e3 1px solid;
