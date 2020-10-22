@@ -45,4 +45,6 @@ LeanCloud 开发版免费配额如下：
 2. 针对存储 Class 禁止所有用户的更新和删除权限；（防后端调用）
 
 ## 未尽事宜
-任何问题请在 https://seatwork.github.io/pagetalk.js/ 下方留言。
+
+1. Markdown 解析在特殊情形下还是有点问题，Marked 官网测试也是如此；
+2. 任何问题请在 https://seatwork.github.io/pagetalk.js/ 下方留言。
