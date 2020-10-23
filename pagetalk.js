@@ -20,32 +20,13 @@ class PageTalk {
         this.emailReg = /^[a-zA-Z0-9_\-\.]+\@[a-zA-Z0-9_\-\.]+\.([a-zA-Z]{2,8})$/
         this.urlReg = /^https?:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z0-9\-\.]+(\:\d+)?[\w\-\/\.@?=%&+#]*$/
         this.avatar = 'https://cn.gravatar.com/avatar/'
+        this.onMessage = options.onMessage || function() {}
         this.createHeader(options.container)
     }
 
     createHeader(container) {
         const user = this.loadLastUser()
-        const header = this._(`
-        <div class="pgtk-container">
-          <div class="pgtk-section">
-            <div class="pgtk-avatar"><img src="${user.avatar}"/></div>
-            <div class="pgtk-form">
-              <div class="pgtk-form-inputs">
-                <input type="text" id="pgtk-nickname" value="${user.nickname}" maxlength="20" placeholder="昵称 (必填)">
-                <input type="text" id="pgtk-email" value="${user.email}" maxlength="50" placeholder="邮箱 (可选, 用于显示全球头像)">
-                <input type="text" id="pgtk-website" value="${user.website}" maxlength="50" placeholder="网站 (可选)">
-              </div>
-              <div class="pgtk-textarea pgtk-markdown" placeholder="不说点什么就说不过去..." contenteditable="plaintext-only"></div>
-              <div class="pgtk-controls">
-                <div><a target="_blank" href="https://guides.github.com/features/mastering-markdown/"><svg viewBox="0 0 16 16" version="1.1" width="20" height="20"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a></div>
-                <button class="pgtk-submit">评论</button>
-                <button class="pgtk-preview">预览</button>
-              </div>
-            </div>
-          </div>
-          <div class="pgtk-message"></div>
-          <div id="pgtk-comment-list"></div>
-        </div>`)
+        const header = this._(`<div class="pgtk-container"><div class="pgtk-section"><div class="pgtk-avatar"><img src="${user.avatar}"/></div><div class="pgtk-form"><div class="pgtk-form-inputs"><input type="text" id="pgtk-nickname" value="${user.nickname}" maxlength="20" placeholder="昵称 (必填)"><input type="text" id="pgtk-email" value="${user.email}" maxlength="50" placeholder="邮箱 (可选, 用于显示全球头像)"><input type="text" id="pgtk-website" value="${user.website}" maxlength="50" placeholder="网站 (可选)"></div><div class="pgtk-textarea pgtk-markdown" placeholder="不说点什么就说不过去..." contenteditable="plaintext-only"></div><div class="pgtk-controls"><div><a target="_blank" href="https://guides.github.com/features/mastering-markdown/"><svg viewBox="0 0 16 16" version="1.1" width="20" height="20"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a></div><button class="pgtk-submit">评论</button><button class="pgtk-preview">预览</button></div></div></div><div class="pgtk-message"></div><div id="pgtk-comment-list"></div></div>`)
 
         header.querySelector('.pgtk-submit').addEventListener('click', e => this.addComment(e))
         header.querySelector('.pgtk-preview').addEventListener('click', e => this.switchPreview(e))
@@ -72,7 +53,8 @@ class PageTalk {
 
         this.setMessage(`共 ${res.results.length} 条评论`)
         res.results.forEach(comment => {
-            const section = this.createSection(comment)
+            const formattedComment = this.formatComment(comment)
+            const section = this.createSection(formattedComment, comment)
             this.element.comments.appendChild(section)
         })
     }
@@ -101,7 +83,8 @@ class PageTalk {
 
         comment.objectId = res.objectId
         comment.createdAt = res.createdAt
-        const section = this.createSection(comment)
+        const formattedComment = this.formatComment(comment)
+        const section = this.createSection(formattedComment, comment)
         const list = this.element.comments.children
 
         if (list.length === 0) {
@@ -112,29 +95,13 @@ class PageTalk {
 
         this.setMessage(`共 ${list.length} 条评论`)
         this.clearPreview()
-        this.saveLastUser(comment)
+        this.saveLastUser(formattedComment)
+        this.onMessage(formattedComment)
     }
 
-    createSection(comment) {
-        // Transform comment data
-        const avatar = this.avatar + md5(comment.email)
-        const createDate = this.formatDate(comment.createdAt)
-        const content = marked(comment.content)
-
-        const item = this._(`
-        <div class="pgtk-section">
-          <div class="pgtk-avatar">
-            <img src="${avatar}"/><div class="pgtk-triangle"></div>
-          </div>
-          <div class="pgtk-comment">
-            <div class="pgtk-profile">
-              <div><a target="_blank" href="${comment.website}">${comment.nickname}</a> 发表于 ${createDate}</div>
-              <svg id="pgtk-reply-icon" viewBox="0 0 1332 1024" width="14"><path d="M529.066665 273.066666 529.066665 0 51.2 477.866666 529.066665 955.733335 529.066665 675.84C870.4 675.84 1109.333335 785.066665 1280 1024 1211.733335 682.666665 1006.933335 341.333334 529.066665 273.066666"></path></svg>
-            </div>
-            <div class="pgtk-markdown">${content}</div>
-          </div>
-        </div>`)
-        item.querySelector('#pgtk-reply-icon').addEventListener('click', e => this.reply(comment))
+    createSection(formattedComment, originalComment) {
+        const item = this._(`<div class="pgtk-section"><div class="pgtk-avatar"><img src="${formattedComment.avatar}"/><div class="pgtk-triangle"></div></div><div class="pgtk-comment"><div class="pgtk-profile"><div><a target="_blank" href="${formattedComment.website}">${formattedComment.nickname}</a> 发表于 ${formattedComment.createdAt}</div><svg id="pgtk-reply-icon" viewBox="0 0 1332 1024" width="14"><path d="M529.066665 273.066666 529.066665 0 51.2 477.866666 529.066665 955.733335 529.066665 675.84C870.4 675.84 1109.333335 785.066665 1280 1024 1211.733335 682.666665 1006.933335 341.333334 529.066665 273.066666"></path></svg></div><div class="pgtk-markdown">${formattedComment.content}</div></div></div>`)
+        item.querySelector('#pgtk-reply-icon').addEventListener('click', e => this.reply(originalComment))
         return item
     }
 
@@ -171,6 +138,14 @@ class PageTalk {
             textarea.setAttribute('contenteditable', 'plaintext-only')
             this.element.preview.innerHTML = '预览'
         }
+    }
+
+    formatComment(comment) {
+        const clone = Object.assign({}, comment)
+        clone.avatar = this.avatar + md5(comment.email)
+        clone.createdAt = this.formatDate(comment.createdAt)
+        clone.content = marked(comment.content)
+        return clone
     }
 
     verifyFormData(comment) {
