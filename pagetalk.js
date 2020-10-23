@@ -53,8 +53,8 @@ class PageTalk {
 
         this.setMessage(`共 ${res.results.length} 条评论`)
         res.results.forEach(comment => {
-            const formattedComment = this.formatComment(comment)
-            const section = this.createSection(formattedComment, comment)
+            const markedComment = this.markComment(comment)
+            const section = this.createSection(markedComment)
             this.element.comments.appendChild(section)
         })
     }
@@ -83,8 +83,8 @@ class PageTalk {
 
         comment.objectId = res.objectId
         comment.createdAt = res.createdAt
-        const formattedComment = this.formatComment(comment)
-        const section = this.createSection(formattedComment, comment)
+        const markedComment = this.markComment(comment)
+        const section = this.createSection(markedComment)
         const list = this.element.comments.children
 
         if (list.length === 0) {
@@ -95,13 +95,13 @@ class PageTalk {
 
         this.setMessage(`共 ${list.length} 条评论`)
         this.clearPreview()
-        this.saveLastUser(formattedComment)
-        this.onMessage(formattedComment)
+        this.saveLastUser(markedComment)
+        this.onMessage(markedComment)
     }
 
-    createSection(formattedComment, originalComment) {
-        const item = this._(`<div class="pgtk-section"><div class="pgtk-avatar"><img src="${formattedComment.avatar}"/><div class="pgtk-triangle"></div></div><div class="pgtk-comment"><div class="pgtk-profile"><div><a target="_blank" href="${formattedComment.website}">${formattedComment.nickname}</a> 发表于 ${formattedComment.createdAt}</div><svg id="pgtk-reply-icon" viewBox="0 0 1332 1024" width="14"><path d="M529.066665 273.066666 529.066665 0 51.2 477.866666 529.066665 955.733335 529.066665 675.84C870.4 675.84 1109.333335 785.066665 1280 1024 1211.733335 682.666665 1006.933335 341.333334 529.066665 273.066666"></path></svg></div><div class="pgtk-markdown">${formattedComment.content}</div></div></div>`)
-        item.querySelector('#pgtk-reply-icon').addEventListener('click', e => this.reply(originalComment))
+    createSection(comment) {
+        const item = this._(`<div class="pgtk-section"><div class="pgtk-avatar"><img src="${comment.avatar}"/><div class="pgtk-triangle"></div></div><div class="pgtk-comment"><div class="pgtk-profile"><div><a target="_blank" href="${comment.website}">${comment.nickname}</a> 发表于 ${comment.createdAt}</div><svg id="pgtk-reply-icon" viewBox="0 0 1332 1024" width="14"><path d="M529.066665 273.066666 529.066665 0 51.2 477.866666 529.066665 955.733335 529.066665 675.84C870.4 675.84 1109.333335 785.066665 1280 1024 1211.733335 682.666665 1006.933335 341.333334 529.066665 273.066666"></path></svg></div><div class="pgtk-markdown">${comment.htmlContent}</div></div></div>`)
+        item.querySelector('#pgtk-reply-icon').addEventListener('click', e => this.reply(comment))
         return item
     }
 
@@ -140,12 +140,11 @@ class PageTalk {
         }
     }
 
-    formatComment(comment) {
-        const clone = Object.assign({}, comment)
-        clone.avatar = this.avatar + md5(comment.email)
-        clone.createdAt = this.formatDate(comment.createdAt)
-        clone.content = marked(comment.content)
-        return clone
+    markComment(comment) {
+        comment.avatar = this.avatar + md5(comment.email)
+        comment.createdAt = this.formatDate(comment.createdAt)
+        comment.htmlContent = marked(comment.content)
+        return comment
     }
 
     verifyFormData(comment) {
@@ -184,7 +183,7 @@ class PageTalk {
             nickname: comment.nickname,
             email: comment.email,
             website: comment.website,
-            avatar: this.avatar + md5(comment.email)
+            avatar: comment.avatar
         }))
     }
 
