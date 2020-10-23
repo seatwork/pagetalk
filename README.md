@@ -33,9 +33,10 @@ new PageTalk({
 ```
 
 3. 可选设置：
-属性 | 类型 | 默认值 | 备注
-className | string | 'PageTalk_Comment' | LeanCloud 存储表名
-onMessage | function | null | 评论提交成功后的回调函数，可用于发送提醒等
+| 属性 | 类型 | 默认值 | 备注 |
+| --- | --- | --- | --- |
+| className | string | 'PageTalk_Comment' | LeanCloud 存储表名 |
+| onMessage | function | null | 评论提交成功后的回调函数，可用于发送提醒等 |
 
 ## 免费配额
 
