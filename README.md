@@ -16,6 +16,7 @@
 ## 使用方法
 
 1. 注册 [LeanCloud](https://leancloud.cn/) 账号，获取 AppID 和 AppKey；
+
 2. 在需要添加评论的页面放置如下代码即可：
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/seatwork/pagetalk/pagetalk.min.css"/>
@@ -30,6 +31,11 @@ new PageTalk({
 })
 </script>
 ```
+
+3. 可选设置：
+属性 | 类型 | 默认值 | 备注
+className | string | 'PageTalk_Comment' | LeanCloud 存储表名
+onMessage | function | null | 评论提交成功后的回调函数，可用于发送提醒等
 
 ## 免费配额
 
