@@ -1,9 +1,9 @@
 # PageTalk
-鉴于 [Gitalk](https://gitalk.github.io/) 在国内调用 Github API 速度太慢，自行开发了一款基于 [LeanCloud](https://leancloud.cn/) 存储的无后端评论系统。示例：https://seatwork.github.io/pagetalk.js/
+鉴于 [Gitalk](https://gitalk.github.io/) 在国内调用 Github API 速度太慢，自行开发了一款基于 [LeanCloud](https://leancloud.cn/) 存储的无后端评论系统。示例：https://seatwork.github.io/pagetalk/
 
 ## 系统特点
 
-- **代码非常少**：除依赖项 MD5 和 Marked（两者均自动加载）以外，PageTalk 本身代码压缩后仅 K，其中 JS，CSS。
+- **代码非常少**：除依赖项 MD5 和 Marked（两者均自动加载）以外，PageTalk 本身 JS+CSS 代码压缩后仅 10KB。
 
 - **速度非常快**：主要得益于 Marked 的卓越性能和 LeanCloud 的高速网络，如果在境外使用，可以尝试替换成 LeanCloud 国际版。
 
@@ -18,8 +18,8 @@
 1. 注册 [LeanCloud](https://leancloud.cn/) 账号，获取 AppID 和 AppKey；
 2. 在需要添加评论的页面放置如下代码即可：
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/seatwork/pagetalk.js/pagetalk.min.css"/>
-<script src="https://cdn.jsdelivr.net/gh/seatwork/pagetalk.js/pagetalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/seatwork/pagetalk/pagetalk.min.css"/>
+<script src="https://cdn.jsdelivr.net/gh/seatwork/pagetalk/pagetalk.min.js"></script>
 
 <div id="pagetalk"></div>
 <script>
@@ -42,9 +42,10 @@ LeanCloud 开发版免费配额如下：
 
 将 AppID 和 AppKey 暴露在前端无疑存在巨大风险，好在 LeanCloud 提供了必要的安全防范措施，请务必在 LeanCloud 后台进行以下两项设置：
 1. 设置 Web 安全域名；（防跨域调用）
-2. 针对存储 Class 禁止所有用户的更新和删除权限；（防后端调用）
+2. 针对存储将更新和删除权限设置为登录用户；（防后端调用）
+3. 针对存储禁止客户端创建 Class；（根据需要）
 
 ## 未尽事宜
 
 1. Markdown 解析在特殊情形下还是有点问题，Marked 官网测试也是如此；
-2. 任何问题请在 https://seatwork.github.io/pagetalk.js/ 下方留言。
+2. 任何问题请在 https://seatwork.github.io/pagetalk/ 下方留言。
