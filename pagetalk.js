@@ -5,8 +5,10 @@ class PageTalk {
      * but sanitize is very useful for me.
      */
     constructor(options) {
-        this.importScript('https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js')
-        this.importScript('https://cdn.jsdelivr.net/npm/marked@0.6.3/marked.min.js', () => {
+        this.importScripts([
+            'https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js',
+            'https://cdn.jsdelivr.net/npm/marked@0.6.3/marked.min.js'
+        ]).then(() => {
             marked.setOptions({
                 sanitize: true
             })
@@ -241,12 +243,22 @@ class PageTalk {
         }
     }
 
-    importScript(url, callback) {
-        const script = document.createElement('script')
-        script.setAttribute('type', 'text/javaScript')
-        script.setAttribute('src', url)
-        script.addEventListener('load', callback)
-        document.getElementsByTagName('head')[0].appendChild(script)
+    importScripts(urls) {
+        return new Promise((resolve, reject) => {
+            const head = document.getElementsByTagName('head')[0]
+            const load = i => {
+                const script = document.createElement('script')
+                script.setAttribute('type', 'text/javaScript')
+                script.setAttribute('src', urls[i])
+                script.onload = script.onerror = () => {
+                    i++
+                    if (i === urls.length) resolve()
+                    else load(i)
+                }
+                head.appendChild(script)
+            }
+            load(0)
+        })
     }
 
     _(selector) {
