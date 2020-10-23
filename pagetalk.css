@@ -135,6 +135,11 @@
   opacity: .9;
 }
 
+.pgtk-controls button:disabled, .pgtk-controls button:disabled:hover {
+  opacity: .6;
+  cursor: default;
+}
+
 .pgtk-controls button.pgtk-submit {
   margin-right: 10px;
 }

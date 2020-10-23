@@ -17,7 +17,6 @@ class PageTalk {
 
         this.emailReg = /^[a-zA-Z0-9_\-\.]+\@[a-zA-Z0-9_\-\.]+\.([a-zA-Z]{2,8})$/
         this.urlReg = /^https?:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z0-9\-\.]+(\:\d+)?[\w\-\/\.@?=%&+#]*$/
-
         this.avatar = 'https://cn.gravatar.com/avatar/'
         this.createHeader(options.container)
     }
@@ -56,6 +55,7 @@ class PageTalk {
             website: header.querySelector('#pgtk-website'),
             textarea: header.querySelector('.pgtk-textarea'),
             message: header.querySelector('.pgtk-message'),
+            submit: header.querySelector('.pgtk-submit'),
             preview: header.querySelector('.pgtk-preview'),
             comments: header.querySelector('#pgtk-comment-list')
         }
@@ -85,12 +85,14 @@ class PageTalk {
             content: (textarea.orginalContent || textarea.textContent).trim(),
             pageId: location.pathname
         }
-
         let res = this.verifyFormData(comment)
         if (res !== true) {
             return this.setMessage(res, true)
         }
+
+        this.element.submit.disabled = true
         res = await this.lcs.insertObject(this.className, comment)
+        this.element.submit.disabled = false
         if (res.error) {
             return this.setMessage(res.error, true)
         }
@@ -240,7 +242,7 @@ class PageTalk {
     }
 
     importScript(url, callback) {
-        var script = document.createElement('script')
+        const script = document.createElement('script')
         script.setAttribute('type', 'text/javaScript')
         script.setAttribute('src', url)
         script.addEventListener('load', callback)
