@@ -211,6 +211,20 @@
   color: #999;
 }
 
+.pgtk-markdown table {
+  border-collapse: collapse;
+  font: inherit;
+}
+
+.pgtk-markdown table thead {
+  background: #f6f8fa;
+}
+
+.pgtk-markdown table th, .pgtk-markdown table td {
+  border: #e3e3e3 1px solid;
+  padding: 6px 12px;
+}
+
 .pgtk-markdown>:first-child, .pgtk-markdown blockquote>:first-child {
   margin-top: 0;
 }
