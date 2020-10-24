@@ -236,11 +236,11 @@
   margin-bottom: 0;
 }
 
-.pgtk-markdown pre::-webkit-scrollbar {
+.pgtk-markdown pre::-webkit-scrollbar, .pgtk-markdown table::-webkit-scrollbar {
   height: 5px;
 }
 
-.pgtk-markdown pre::-webkit-scrollbar-thumb {
+.pgtk-markdown pre::-webkit-scrollbar-thumb, .pgtk-markdown table::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
