@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins Light'), local('Poppins-Light'), url(//cdn.unpkg.net/font/poppins-light.woff2) format('woff2');
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+section.cover img {
+  width: 150px;
+}
+
+section.cover h1 small {
+  bottom: auto;
+}
+
+button.sidebar-toggle {
+  width: auto;
+}
+
+aside.sidebar ul li a {
+  font-size: 15px;
+}
+
+section.content {
+  padding-top: 30px;
+}
+
+section.content .markdown-section {
+  max-width: 900px;
+  padding: 30px 45px 30px 30px;
+}
+
+.sidebar-nav ul {
+  margin-left: 30px;
+}
+
+.markdown-section p {
+  line-height: 1.8;
+}
+
+.markdown-section p a, .markdown-section ul a, .markdown-section ol a, .markdown-section blockquote a {
+  font-weight: initial;
+}
+
+.markdown-section pre>code {
+  padding: 1.5em 5px;
+  font-size: 0.9em;
+}
+
+.markdown-section pre:after {
+  font-weight: initial;
+}
+
+@media screen and (max-width: 768px) {
+  section.content {
+    padding-top: 0;
+  }
+}
