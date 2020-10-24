@@ -212,8 +212,11 @@
 }
 
 .pgtk-markdown table {
+  display: block;
   border-collapse: collapse;
   font: inherit;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .pgtk-markdown table thead {
