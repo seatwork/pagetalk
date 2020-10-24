@@ -17,6 +17,7 @@
 
 .pgtk-container svg {
   fill: #999;
+  vertical-align: middle;
   cursor: pointer;
 }
 
@@ -113,8 +114,12 @@
   display: flex;
 }
 
-.pgtk-controls>div {
+.pgtk-badge {
   flex: 1;
+}
+
+.pgtk-badge>a:first-child {
+  margin-right: 10px;
 }
 
 .pgtk-controls button {
@@ -266,10 +271,10 @@
     margin: 0;
     margin-top: 10px;
   }
-  .pgtk-controls>div {
-    display: none;
-  }
   .pgtk-controls button {
     flex: 1;
+  }
+  .pgtk-badge {
+    display: none;
   }
 }
