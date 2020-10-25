@@ -28,7 +28,7 @@ new PageTalk({
 | --- | --- | --- | --- |
 | container | string | null | 必需，PageTalk 所在的页面容器 |
 | appId | string | null | 必需，LeanCloud 账号的 AppID |
-| appKey | string | null | 必需，LeanCloud 账号的 appKey |
+| appKey | string | null | 必需，LeanCloud 账号的 AppKey |
 | className | string | 'PageTalk_Comment' | 可选，LeanCloud 存储表名 |
 | onMessage | function | null | 可选，评论提交成功后的回调函数，常用于发送提醒等 |
 
