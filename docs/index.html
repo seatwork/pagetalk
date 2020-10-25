@@ -6,9 +6,9 @@
   <meta name="description" content="一款基于 LeanCloud 存储的无后端评论系统。"/>
   <link rel="icon" href="favicon.ico"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
-  <link rel="stylesheet" href="_assets/override.css"/>
-  <link rel="stylesheet" href="pagetalk.css"/>
-  <script src="pagetalk.js"></script>
+  <link rel="stylesheet" href="assets/override.css"/>
+  <link rel="stylesheet" href="//unpkg.net/seatwork/pagetalk/pagetalk.css"/>
+  <script src="//unpkg.net/seatwork/pagetalk/pagetalk.js"></script>
   <title>PageTalk</title>
 </head>
 <body>
@@ -16,7 +16,10 @@
 
 <script>
 $docsify = {
-  coverpage: true,
+  coverpage: 'COVER.md',
+  homepage: 'https://unpkg.net/seatwork/pagetalk/README.md',
+  repo: 'seatwork/pagetalk',
+  topMargin: 20,
   plugins: [
     function(hook) {
       hook.mounted(function() {
